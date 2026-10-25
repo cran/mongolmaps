@@ -1,10 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mongolmaps
+# mongolmaps <a href="https://temuulene.github.io/mongolmaps/"><img src="man/figures/logo.svg" align="right" height="139" alt="mongolmaps website" /></a>
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mongolmaps)](https://CRAN.R-project.org/package=mongolmaps)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
@@ -29,6 +31,12 @@ English and Mongolian names, parent units, area), so maps at different
 levels work the same way.
 
 ## Installation
+
+``` r
+install.packages("mongolmaps")
+```
+
+The development version is on GitHub:
 
 ``` r
 # install.packages("pak")
@@ -59,7 +67,7 @@ for you.
 pop <- mn_example_population[mn_example_population$Year == 2025, ]
 
 pop_map <- mn_join(pop, by = "Region", level = "aimag")
-#> ℹ Joining at the aimag level; dropped 6 rows for larger units ("country" and
+#> ℹ Joining at the aimag level; dropped 5 rows for larger units ("country" and
 #>   "region") and 2196 rows for smaller units ("soum" and "bag").
 
 mn_map(pop_map, fill = value, trans = "log10", context = TRUE,
@@ -145,6 +153,18 @@ mn_codes("soum", within = "Khovd")
   `mn_zonal()` to sum them by aimag, soum or khoroo.
 - Protected areas: `mn_protected_areas()`.
 - Small multiples: `mn_aimag_grid` for `geofacet::facet_geo()`.
+
+## Auditable workflows and inset maps
+
+`mn_join_audit()` records the outcome of every input row; `mn_match(details = TRUE)`
+exposes candidate matches. Use `strict = TRUE`, `fuzzy = FALSE` and explicit
+`strata` for checked analytical joins. `mn_provenance()` and `mn_vintages()`
+describe the available source snapshots and authority.
+
+Optional `patchwork` helpers `mn_inset_ub()` and `mn_map_ub()` enlarge the
+capital and separate its detached districts without moving analytical
+geometry. `mn_map()` accepts shared `limits`/`breaks`, `bins` and `midpoint`.
+See the [audited workflows guide](https://temuulene.github.io/mongolmaps/articles/audited-workflows.html).
 
 ## Data sources
 
